@@ -13,11 +13,14 @@ namespace Sinch.WebApiClient
 {
     class WebClientRequestInterceptor<TInterface> : IInterceptor
     {
+        private readonly HttpMessageHandler _httpMessageHandler;
         private readonly IActionFilter[] _filters;
         private readonly Uri _baseUri;
+        private static readonly MethodInfo ExecuteGenericTaskMethodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetMethod("ExecuteGenericTask", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        public WebClientRequestInterceptor(string baseUri, IActionFilter[] filters)
+        public WebClientRequestInterceptor(string baseUri, HttpMessageHandler httpMessageHandler, IActionFilter[] filters)
         {
+            _httpMessageHandler = httpMessageHandler;
             _filters = filters;
 
             _baseUri = new Uri(baseUri);
@@ -32,15 +35,11 @@ namespace Sinch.WebApiClient
             }
             else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>))
             {
-                var subType = type.GetGenericArguments()[0];
-
-                var methodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetMethod("ExecuteGenericTask", BindingFlags.Instance | BindingFlags.NonPublic);
-                var genericMethod = methodInfo.MakeGenericMethod(subType);
-
+                var genericMethod = ExecuteGenericTaskMethodInfo.MakeGenericMethod(type.GetGenericArguments()[0]);
                 invocation.ReturnValue = genericMethod.Invoke(this, new object[] { invocation });
             }
             else
-                throw new WebApiClientException("ReturnType: " + type + " not supported. Must be Task or Task<>.");
+                throw new WebApiClientException($"ReturnType: {type} not supported. Must be Task or Task<>.");
         }
 
         private async Task ExecuteTask(IInvocation invocation)
@@ -50,7 +49,7 @@ namespace Sinch.WebApiClient
             foreach (var inerceptor in _filters)
                 await inerceptor.OnActionExecuting(httpRequestMessage);
 
-            using (var client = new HttpClient())
+            using (var client = CreateHttpClient())
             {
                 var response = await client.SendAsync(httpRequestMessage);
 
@@ -72,7 +71,7 @@ namespace Sinch.WebApiClient
             foreach (var inerceptor in _filters)
                 await inerceptor.OnActionExecuting(httpRequestMessage);
 
-            using (var client = new HttpClient())
+            using (var client = CreateHttpClient())
             {
                 var response = await client.SendAsync(httpRequestMessage);
 
@@ -83,12 +82,19 @@ namespace Sinch.WebApiClient
 
                 if (response.StatusCode == HttpStatusCode.OK)
                     return JsonConvert.DeserializeObject<T>(value);
-
+                
                 if (response.StatusCode == HttpStatusCode.NoContent)
                     return default(T);
-
+                
                 throw new WebApiClientException();
             }
+        }
+
+        private HttpClient CreateHttpClient()
+        {
+            return _httpMessageHandler != null
+                ? new HttpClient(_httpMessageHandler)
+                : new HttpClient();
         }
 
         private HttpRequestMessage BuildHttpRequestMessage(IInvocation invocation)
@@ -119,7 +125,10 @@ namespace Sinch.WebApiClient
                     continue;
 
                 if (IsSimpleType(arguments[i]))
+                {
                     result.Add(parameters[i].Name, string.Format(CultureInfo.InvariantCulture, "{0}", arguments[i]));
+                    continue;
+                }
 
                 if (parameters[i].GetCustomAttribute<ToUriAttribute>() == null)
                     continue;

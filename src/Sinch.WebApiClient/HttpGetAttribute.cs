@@ -11,9 +11,6 @@ namespace Sinch.WebApiClient
             Route = route;
         }
 
-        public override HttpMethod Method
-        {
-            get { return HttpMethod.Get; }
-        }
+        public override HttpMethod Method => HttpMethod.Get;
     }
 }
