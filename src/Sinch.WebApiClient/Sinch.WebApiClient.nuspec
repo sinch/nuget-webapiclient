@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="Castle.Core" version="3.3.3" />
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
+      </group>
+    </dependencies>
+    <id>Sinch.WebApiClient</id>
+    <version>1.0.0</version>
+    <title>Sinch.WebApiClient</title>
+    <authors>Sinch AB</authors>
+    <description>Helper library to create a Rest client from interface.
+
+For sample usage see https://github.com/sinch/nuget-webapiclient
+	</description>
+    <summary>Helper library to create a Rest client from interface</summary>
+    <language />
+    <projectUrl>https://github.com/sinch/nuget-webapiclient</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>false</developmentDependency>
+    <releaseNotes>Initial release of Sinch.WebApiClient</releaseNotes>
+    <copyright>Copyright ©  2015</copyright>
+    <tags>Sinch, WebApi, AttributeRouting, Rest, DynamicProxy</tags>
+  </metadata>
+</package>
