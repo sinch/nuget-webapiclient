@@ -10,7 +10,10 @@
     <id>Sinch.WebApiClient</id>
     <version>1.0.0</version>
     <title>Sinch.WebApiClient</title>
-    <authors>Sinch AB</authors>
+    <authors>Bruno Blank</authors>
+    <owners>Sinch AB</owners>
+    <iconUrl>https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png</iconUrl>
+
     <description>Helper library to create a Rest client from interface.
 
 For sample usage see https://github.com/sinch/nuget-webapiclient
@@ -21,7 +24,7 @@ For sample usage see https://github.com/sinch/nuget-webapiclient
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
     <releaseNotes>Initial release of Sinch.WebApiClient</releaseNotes>
-    <copyright>Copyright ©  2015</copyright>
+    <copyright>Copyright © 2015 Sinch</copyright>
     <tags>Sinch, WebApi, AttributeRouting, Rest, DynamicProxy</tags>
   </metadata>
 </package>
