@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Sinch.WebApiClient</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>Sinch WebApiClient</title>
     <authors>Bruno Blank</authors>
     <owners>Sinch AB</owners>

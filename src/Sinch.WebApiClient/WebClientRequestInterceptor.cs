@@ -126,16 +126,16 @@ namespace Sinch.WebApiClient
 
             for (var i = 0; i < arguments.Length; ++i)
             {
-                if (parameters[i].GetCustomAttribute<ToBodyAttribute>() != null)
+                if (parameters[i].IsDefined(typeof(ToBodyAttribute)))
                     continue;
 
-                if (IsSimpleType(arguments[i]))
+                if (IsUriParameterType(parameters[i].ParameterType))
                 {
                     result.Add(parameters[i].Name, string.Format(CultureInfo.InvariantCulture, "{0}", arguments[i]));
                     continue;
                 }
 
-                if (parameters[i].GetCustomAttribute<ToUriAttribute>() == null)
+                if (!parameters[i].IsDefined(typeof(ToUriAttribute)))
                     continue;
 
                 foreach (var property in arguments[i].GetType().GetProperties())
@@ -154,33 +154,46 @@ namespace Sinch.WebApiClient
 
             for (var i = 0; i < arguments.Count; ++i)
             {
-                if (parameters[i].GetCustomAttribute<ToBodyAttribute>() != null)
+                if (parameters[i].IsDefined(typeof(ToBodyAttribute)))
                     return arguments[i];
 
-                if (IsSimpleType(arguments[i]))
+                if (IsUriParameterType(parameters[i].ParameterType))
                     continue;
 
-                if (parameters[i].GetCustomAttribute<ToUriAttribute>() == null)
+                if (!parameters[i].IsDefined(typeof(ToUriAttribute)))
                     return arguments[i];
             }
 
             return null;
         }
 
-        static bool IsSimpleType(object o)
+        static bool IsUriParameterType(Type parameterType)
         {
-            return o is string ||
-                   o is byte ||
-                   o is char ||
-                   o is short ||
-                   o is ushort ||
-                   o is int ||
-                   o is uint ||
-                   o is long ||
-                   o is ulong ||
-                   o is decimal ||
-                   o is float ||
-                   o is Guid;
+            return parameterType == typeof (string) ||
+                   parameterType == typeof (int) ||
+                   parameterType == typeof (int?) ||
+                   parameterType == typeof (byte) ||
+                   parameterType == typeof (byte?) ||
+                   parameterType == typeof (char) ||
+                   parameterType == typeof (char?) ||
+                   parameterType == typeof (short) ||
+                   parameterType == typeof (short?) ||
+                   parameterType == typeof (ushort) ||
+                   parameterType == typeof (ushort?) ||
+                   parameterType == typeof (uint) ||
+                   parameterType == typeof (uint?) ||
+                   parameterType == typeof (long) ||
+                   parameterType == typeof (long?) ||
+                   parameterType == typeof (ulong) ||
+                   parameterType == typeof (ulong?) ||
+                   parameterType == typeof (decimal) ||
+                   parameterType == typeof (decimal?) ||
+                   parameterType == typeof (float) ||
+                   parameterType == typeof (float?) ||
+                   parameterType == typeof (double) ||
+                   parameterType == typeof (double?) ||
+                   parameterType == typeof (Guid) ||
+                   parameterType == typeof (Guid?);
         }
     }
 }
