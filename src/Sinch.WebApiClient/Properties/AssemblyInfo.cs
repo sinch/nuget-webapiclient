@@ -1,16 +1,20 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿/* Copyright © 2015 Sinch AB
+
+ This software may be modified and distributed under the terms
+ of the MIT license.  See the LICENSE file for details
+*/
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WebApiClient")]
+[assembly: AssemblyTitle("Sinch.WebApiClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WebApiClient")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("Sinch AB")]
+[assembly: AssemblyProduct("Sinch.WebApiClient")]
+[assembly: AssemblyCopyright("Copyright ©  2015 Sinch AB")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +36,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

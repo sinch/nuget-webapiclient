@@ -1,30 +1,29 @@
 ﻿<?xml version="1.0"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
-    <dependencies>
-      <group targetFramework="net45">
-        <dependency id="Castle.Core" version="3.3.3" />
-        <dependency id="Newtonsoft.Json" version="7.0.1" />
-      </group>
-    </dependencies>
     <id>Sinch.WebApiClient</id>
     <version>1.0.0</version>
-    <title>Sinch.WebApiClient</title>
+    <title>Sinch WebApiClient</title>
     <authors>Bruno Blank</authors>
     <owners>Sinch AB</owners>
-    <iconUrl>https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png</iconUrl>
+    <description>
+      Helper library to create a Rest client from interface.
 
-    <description>Helper library to create a Rest client from interface.
-
-For sample usage see https://github.com/sinch/nuget-webapiclient
-	</description>
+      For sample usage see https://github.com/sinch/nuget-webapiclient
+    </description>
+    <releaseNotes>Initial release of Sinch.WebApiClient</releaseNotes>
     <summary>Helper library to create a Rest client from interface</summary>
     <language />
     <projectUrl>https://github.com/sinch/nuget-webapiclient</projectUrl>
+    <iconUrl>https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png</iconUrl>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <copyright>Copyright © 2015 Sinch AB</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
-    <releaseNotes>Initial release of Sinch.WebApiClient</releaseNotes>
-    <copyright>Copyright © 2015 Sinch</copyright>
-    <tags>Sinch, WebApi, AttributeRouting, Rest, DynamicProxy</tags>
+    <tags>sinch, webapi, attributerouting, rest, dynamicproxy</tags>
   </metadata>
+  <files>
+    <file src="..\..\License.txt"/>
+    <file src="..\..\Readme.md"/>
+  </files>
 </package>
