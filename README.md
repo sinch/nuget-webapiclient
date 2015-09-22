@@ -5,7 +5,7 @@
 This package supports
 
 	API definition with interface
-	Auto generating implementation using Castle.Core dynamic proxy
+	Auto generating implementation using Castle.Core
 	Attribute routing
 	Asynchronous implementation
 	Action Filters
@@ -19,14 +19,14 @@ Sinch WebApiClient is &copy; 2015 Sinch AB. It is free software, and may be redi
 Map methods, reguest and response using an interface.
 
 	public interface IEchoApi
-    {
+	{
         [HttpGet("echo/{name}")]
         Task<string> Echo(string name);
-    }
+	}
 
-## Auto generating implementation using Castle.Core dynamic proxy
+## Auto generating implementation using Castle.Core
 
-An implementation is generated that implements the defined interface using Castle.Core. 
+An implementation is generated for the defined interface using Castle.Core dynamic proxy. 
 
 	var factory = new WebApiClientFactory();
 	var echoApi = factory.CreateClient<IEchoApi>("http://127.0.0.1:4711");
@@ -35,13 +35,13 @@ An implementation is generated that implements the defined interface using Castl
 
 ## Attribute routing
 
-Routing is performed similar to WebApi controllers.
+Routing is performed similar to WebApi Controllers.
 
 	public interface IAttributeRoutingApi
     {
         [HttpGet("products")]
         Task<ProductList> GetAll();
-
+		
         [HttpGet("products/{id}")]
         Task<Product> GetById(string id);
         
@@ -52,7 +52,7 @@ Routing is performed similar to WebApi controllers.
         Task DeleteById(string id);
     }
 
-Also support [ToUri] and [ToBody] attribute on routing.
+Also support **[ToUri]** and **[ToBody]** attribute on routing.
 
 	public class Name
 	{
