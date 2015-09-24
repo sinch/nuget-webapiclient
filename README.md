@@ -52,7 +52,7 @@ Routing is performed similar to WebApi Controllers.
         Task DeleteById(string id);
     }
 
-Also support **[ToUri]** and **[ToBody]** attribute on routing.
+Also support **[ToUri]** and **[ToBody]** attribute routing. 
 
 	public class Name
 	{

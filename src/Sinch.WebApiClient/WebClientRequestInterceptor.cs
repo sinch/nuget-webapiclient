@@ -52,14 +52,14 @@ namespace Sinch.WebApiClient
             var httpRequestMessage = BuildHttpRequestMessage(invocation);
 
             foreach (var inerceptor in _filters)
-                await inerceptor.OnActionExecuting(httpRequestMessage);
+                await inerceptor.OnActionExecuting(httpRequestMessage).ConfigureAwait(false);
 
             using (var client = CreateHttpClient())
             {
-                var response = await client.SendAsync(httpRequestMessage);
+                var response = await client.SendAsync(httpRequestMessage).ConfigureAwait(false);
 
                 foreach (var inerceptor in _filters)
-                    await inerceptor.OnActionExecuted(response);
+                    await inerceptor.OnActionExecuted(response).ConfigureAwait(false);
 
                 if (response.StatusCode == HttpStatusCode.NoContent ||
                     response.StatusCode == HttpStatusCode.OK)
@@ -74,16 +74,16 @@ namespace Sinch.WebApiClient
             var httpRequestMessage = BuildHttpRequestMessage(invocation);
 
             foreach (var inerceptor in _filters)
-                await inerceptor.OnActionExecuting(httpRequestMessage);
+                await inerceptor.OnActionExecuting(httpRequestMessage).ConfigureAwait(false);
 
             using (var client = CreateHttpClient())
             {
                 var response = await client.SendAsync(httpRequestMessage);
 
                 foreach (var inerceptor in _filters)
-                    await inerceptor.OnActionExecuted(response);
+                    await inerceptor.OnActionExecuted(response).ConfigureAwait(false);
 
-                var value = await response.Content.ReadAsStringAsync();
+                var value = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                     return JsonConvert.DeserializeObject<T>(value);
