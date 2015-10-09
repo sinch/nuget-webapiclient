@@ -109,8 +109,12 @@ namespace Sinch.WebApiClient
 
             var httpAttribute = invocation.Method.GetCustomAttribute<HttpAttribute>();
 
+            var builder = new UriBuilder(_baseUri);
+            builder.Path += invocation.Method.DeclaringType.GetCustomAttribute<RouteAttribute>()?.Value;
+
             var template = new UriTemplate(httpAttribute.Route);
-            var uri = template.BindByName(_baseUri, uriParameters);
+            var uri = template.BindByName(builder.Uri, uriParameters);
+
             var httpRequestMessage = new HttpRequestMessage(httpAttribute.Method, uri);
 
             if (body != null)
@@ -137,6 +141,9 @@ namespace Sinch.WebApiClient
 
                 if (!parameters[i].IsDefined(typeof(ToUriAttribute)))
                     continue;
+
+                if (arguments[i] == null)
+                    throw new ArgumentNullException(parameters[i].Name);
 
                 foreach (var property in arguments[i].GetType().GetProperties())
                 {

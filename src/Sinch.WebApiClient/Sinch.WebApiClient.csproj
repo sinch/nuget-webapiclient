@@ -58,6 +58,7 @@
     <Compile Include="HttpPutAttribute.cs" />
     <Compile Include="IActionFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteAttribute.cs" />
     <Compile Include="ToBodyAttribute.cs" />
     <Compile Include="ToUriAttribute.cs" />
     <Compile Include="WebApiClientException.cs" />
