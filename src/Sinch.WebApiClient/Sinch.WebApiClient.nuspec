@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Sinch.WebApiClient</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>Sinch WebApiClient</title>
     <authors>Sinch AB</authors>
     <owners>Sinch AB</owners>
@@ -11,7 +11,7 @@
 
       For sample usage see https://github.com/sinch/nuget-webapiclient
     </description>
-    <releaseNotes>Added ConfigureAwait(false) for awaited tasks</releaseNotes>
+    <releaseNotes>Signed the assembly</releaseNotes>
     <summary>Helper library to create a Rest client from interface</summary>
     <language />
     <projectUrl>https://github.com/sinch/nuget-webapiclient</projectUrl>
