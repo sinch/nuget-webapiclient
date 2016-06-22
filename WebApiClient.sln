@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinch.WebApiClient", "src\Sinch.WebApiClient\Sinch.WebApiClient.csproj", "{A31AC4EA-B1A4-4D43-BA5E-6FF22A117624}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{374E149C-2257-4033-96A6-8F62A39EF865}"
 	ProjectSection(SolutionItems) = preProject
 		License.txt = License.txt
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sinch.WebApiClient", "src\Sinch.WebApiClient\Sinch.WebApiClient.xproj", "{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A31AC4EA-B1A4-4D43-BA5E-6FF22A117624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A31AC4EA-B1A4-4D43-BA5E-6FF22A117624}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A31AC4EA-B1A4-4D43-BA5E-6FF22A117624}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A31AC4EA-B1A4-4D43-BA5E-6FF22A117624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

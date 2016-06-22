@@ -13,19 +13,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using Newtonsoft.Json;
+using Tavis.UriTemplates;
 
 namespace Sinch.WebApiClient
 {
-    class WebClientRequestInterceptor<TInterface> : IInterceptor
+    internal class WebClientRequestInterceptor<TInterface> : IInterceptor
     {
-        private readonly HttpMessageHandler _httpMessageHandler;
+        private readonly HttpClient _httpClient;
         private readonly IActionFilter[] _filters;
         private readonly Uri _baseUri;
-        private static readonly MethodInfo ExecuteGenericTaskMethodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetMethod("ExecuteGenericTask", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly MethodInfo ExecuteGenericTaskMethodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetTypeInfo().GetMethod(nameof(ExecuteGenericTask), BindingFlags.Instance | BindingFlags.NonPublic);
 
-        public WebClientRequestInterceptor(string baseUri, HttpMessageHandler httpMessageHandler, IActionFilter[] filters)
+        public WebClientRequestInterceptor(string baseUri, HttpClient httpClient, IActionFilter[] filters)
         {
-            _httpMessageHandler = httpMessageHandler;
+            _httpClient = httpClient;
             _filters = filters;
 
             _baseUri = new Uri(baseUri);
@@ -38,9 +39,9 @@ namespace Sinch.WebApiClient
             {
                 invocation.ReturnValue = ExecuteTask(invocation);
             }
-            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>))
+            else if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>))
             {
-                var genericMethod = ExecuteGenericTaskMethodInfo.MakeGenericMethod(type.GetGenericArguments()[0]);
+                var genericMethod = ExecuteGenericTaskMethodInfo.MakeGenericMethod(type.GetTypeInfo().GetGenericArguments()[0]);
                 invocation.ReturnValue = genericMethod.Invoke(this, new object[] { invocation });
             }
             else
@@ -54,10 +55,8 @@ namespace Sinch.WebApiClient
             foreach (var inerceptor in _filters)
                 await inerceptor.OnActionExecuting(httpRequestMessage).ConfigureAwait(false);
 
-            using (var client = CreateHttpClient())
+            using (var response = await _httpClient.SendAsync(httpRequestMessage).ConfigureAwait(false))
             {
-                var response = await client.SendAsync(httpRequestMessage).ConfigureAwait(false);
-
                 foreach (var inerceptor in _filters)
                     await inerceptor.OnActionExecuted(response).ConfigureAwait(false);
 
@@ -76,10 +75,8 @@ namespace Sinch.WebApiClient
             foreach (var inerceptor in _filters)
                 await inerceptor.OnActionExecuting(httpRequestMessage).ConfigureAwait(false);
 
-            using (var client = CreateHttpClient())
+            using (var response = await _httpClient.SendAsync(httpRequestMessage).ConfigureAwait(false))
             {
-                var response = await client.SendAsync(httpRequestMessage);
-
                 foreach (var inerceptor in _filters)
                     await inerceptor.OnActionExecuted(response).ConfigureAwait(false);
 
@@ -87,55 +84,45 @@ namespace Sinch.WebApiClient
 
                 if (response.StatusCode == HttpStatusCode.OK)
                     return JsonConvert.DeserializeObject<T>(value);
-                
+
                 if (response.StatusCode == HttpStatusCode.NoContent)
                     return default(T);
-                
+
                 throw new WebApiClientException();
             }
         }
 
-        private HttpClient CreateHttpClient()
-        {
-            return _httpMessageHandler != null
-                ? new HttpClient(_httpMessageHandler)
-                : new HttpClient();
-        }
-
         private HttpRequestMessage BuildHttpRequestMessage(IInvocation invocation)
         {
-            var uriParameters = GetUriParameters(invocation.Method, invocation.Arguments);
-            var body = GetBodyParameter(invocation.Method, invocation.Arguments);
-
             var httpAttribute = invocation.Method.GetCustomAttribute<HttpAttribute>();
 
-            var builder = new UriBuilder(_baseUri);
-            builder.Path += invocation.Method.DeclaringType.GetCustomAttribute<RouteAttribute>()?.Value;
+            var uriTemplate = new Uri(new Uri(_baseUri, invocation.Method.DeclaringType.GetTypeInfo().GetCustomAttribute<RouteAttribute>()?.Value ?? string.Empty), httpAttribute.Route);
 
-            var template = new UriTemplate(httpAttribute.Route);
-            var uri = template.BindByName(builder.Uri, uriParameters);
+            var template = new UriTemplate(uriTemplate.ToString());
+            AddUriParameters(invocation.Method, template, invocation.Arguments);
+            var uri = template.Resolve();
 
             var httpRequestMessage = new HttpRequestMessage(httpAttribute.Method, uri);
 
+            var body = GetBodyParameter(invocation.Method, invocation.Arguments);
             if (body != null)
                 httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 
             return httpRequestMessage;
         }
 
-        private static IDictionary<string, string> GetUriParameters(MethodBase methodBase, params object[] arguments)
+        private static void AddUriParameters(MethodBase methodBase, UriTemplate uriTemplate, IReadOnlyList<object> arguments)
         {
-            var result = new Dictionary<string, string>();
             var parameters = methodBase.GetParameters();
 
-            for (var i = 0; i < arguments.Length; ++i)
+            for (var i = 0; i < arguments.Count; ++i)
             {
                 if (parameters[i].IsDefined(typeof(ToBodyAttribute)))
                     continue;
 
                 if (IsUriParameterType(parameters[i].ParameterType))
                 {
-                    result.Add(parameters[i].Name, string.Format(CultureInfo.InvariantCulture, "{0}", arguments[i]));
+                    uriTemplate.SetParameter(parameters[i].Name, string.Format(CultureInfo.InvariantCulture, "{0}", arguments[i]));
                     continue;
                 }
 
@@ -145,17 +132,15 @@ namespace Sinch.WebApiClient
                 if (arguments[i] == null)
                     throw new ArgumentNullException(parameters[i].Name);
 
-                foreach (var property in arguments[i].GetType().GetProperties())
+                foreach (var property in arguments[i].GetType().GetTypeInfo().GetProperties())
                 {
-                    result.Add(property.Name,
+                    uriTemplate.SetParameter(property.Name, 
                         string.Format(CultureInfo.InvariantCulture, "{0}", property.GetValue(arguments[i])));
                 }
             }
-
-            return result;
         }
 
-        private static object GetBodyParameter(MethodInfo methodBase, IList<object> arguments)
+        private static object GetBodyParameter(MethodBase methodBase, IList<object> arguments)
         {
             var parameters = methodBase.GetParameters();
 
@@ -174,7 +159,7 @@ namespace Sinch.WebApiClient
             return null;
         }
 
-        static bool IsUriParameterType(Type parameterType)
+        private static bool IsUriParameterType(Type parameterType)
         {
             return parameterType == typeof (string) ||
                    parameterType == typeof (int) ||
