@@ -1,16 +1,16 @@
-{
-  "version": "1.1.0-rc3",
+﻿{
+  "version": "1.1.0-rc4",
   "title": "Sinch WebApiClient",
   "authors": [ "Sinch AB" ],
   "description": "Helper library to create a Rest client from interface. For sample usage see https://github.com/sinch/nuget-webapiclient",
-  "copyright": "Copyright � 2015 Sinch AB",
+  "copyright": "Copyright © 2015 Sinch AB",
 
   "packOptions": {
     "projectUrl": "https://github.com/sinch/nuget-webapiclient",
     "iconUrl": "https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png",
     "licenseUrl": "https://opensource.org/licenses/MIT",
     "owners": [ "Sinch AB" ],
-    "releaseNotes": "First build for .net core",
+    "releaseNotes": "Updated to Castle.Core beta001",
     "summary": "Helper library to create a Rest client from interface",
     "requireLicenseAcceptance": false,
     "tags": [ "sinch", "webapi", "attributerouting", "rest", "dynamicproxy" ],
@@ -22,21 +22,19 @@
   },
 
   "dependencies": {
+    "Castle.Core": "4.0.0-beta001",
     "Newtonsoft.Json": "9.0.1",
-    "Tavis.UriTemplates": "1.0.0"
+    "Tavis.UriTemplates": "1.1.0"
   },
 
   "frameworks": {
-    "netstandard1.5": {
-      "imports": "dnxcore50",
+    "netstandard1.3": {
       "dependencies": {
-        "Castle.Core": "4.0.0-alpha001",
         "NETStandard.Library": "1.6.0"
       }
     },
     "net45": {
       "dependencies": {
-        "Castle.Core": "3.3.3",
         "System.Net.Http": "4.0.0"
       }
     }

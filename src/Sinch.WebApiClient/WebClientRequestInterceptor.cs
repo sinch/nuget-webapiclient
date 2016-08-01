@@ -22,7 +22,7 @@ namespace Sinch.WebApiClient
         private readonly HttpClient _httpClient;
         private readonly IActionFilter[] _filters;
         private readonly Uri _baseUri;
-        private static readonly MethodInfo ExecuteGenericTaskMethodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetTypeInfo().GetMethod(nameof(ExecuteGenericTask), BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly MethodInfo ExecuteGenericTaskMethodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetMethod(nameof(ExecuteGenericTask), BindingFlags.Instance | BindingFlags.NonPublic);
 
         public WebClientRequestInterceptor(string baseUri, HttpClient httpClient, IActionFilter[] filters)
         {
@@ -41,7 +41,7 @@ namespace Sinch.WebApiClient
             }
             else if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>))
             {
-                var genericMethod = ExecuteGenericTaskMethodInfo.MakeGenericMethod(type.GetTypeInfo().GetGenericArguments()[0]);
+                var genericMethod = ExecuteGenericTaskMethodInfo.MakeGenericMethod(type.GetGenericArguments()[0]);
                 invocation.ReturnValue = genericMethod.Invoke(this, new object[] { invocation });
             }
             else
@@ -132,7 +132,7 @@ namespace Sinch.WebApiClient
                 if (arguments[i] == null)
                     throw new ArgumentNullException(parameters[i].Name);
 
-                foreach (var property in arguments[i].GetType().GetTypeInfo().GetProperties())
+                foreach (var property in arguments[i].GetType().GetProperties())
                 {
                     uriTemplate.SetParameter(property.Name, 
                         string.Format(CultureInfo.InvariantCulture, "{0}", property.GetValue(arguments[i])));
