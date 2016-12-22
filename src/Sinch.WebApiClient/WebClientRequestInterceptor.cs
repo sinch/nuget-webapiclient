@@ -98,7 +98,7 @@ namespace Sinch.WebApiClient
 
             var uriTemplate = new Uri(new Uri(_baseUri, invocation.Method.DeclaringType.GetTypeInfo().GetCustomAttribute<RouteAttribute>()?.Value ?? string.Empty), httpAttribute.Route);
 
-            var template = new UriTemplate(uriTemplate.ToString());
+            var template = new UriTemplate(uriTemplate.ToString(), false, true);
             AddUriParameters(invocation.Method, template, invocation.Arguments);
             var uri = template.Resolve();
 
@@ -134,8 +134,7 @@ namespace Sinch.WebApiClient
 
                 foreach (var property in arguments[i].GetType().GetProperties())
                 {
-                    uriTemplate.SetParameter(property.Name, 
-                        string.Format(CultureInfo.InvariantCulture, "{0}", property.GetValue(arguments[i])));
+                    uriTemplate.SetParameter(property.Name, string.Format(CultureInfo.InvariantCulture, "{0}", property.GetValue(arguments[i])));
                 }
             }
         }
