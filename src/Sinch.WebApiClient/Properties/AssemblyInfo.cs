@@ -4,6 +4,7 @@
  of the MIT license.  See the LICENSE file for details
 */
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -38,3 +39,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.3.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// Show internals to unittests
+[assembly: InternalsVisibleTo("Sinch.WebApiClientTest")]

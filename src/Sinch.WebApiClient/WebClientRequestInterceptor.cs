@@ -19,12 +19,12 @@ namespace Sinch.WebApiClient
 {
     internal class WebClientRequestInterceptor<TInterface> : IInterceptor
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClient _httpClient;
         private readonly IActionFilter[] _filters;
         private readonly Uri _baseUri;
         private static readonly MethodInfo ExecuteGenericTaskMethodInfo = typeof(WebClientRequestInterceptor<TInterface>).GetMethod(nameof(ExecuteGenericTask), BindingFlags.Instance | BindingFlags.NonPublic);
 
-        public WebClientRequestInterceptor(string baseUri, HttpClient httpClient, IActionFilter[] filters)
+        public WebClientRequestInterceptor(string baseUri, IHttpClient httpClient, IActionFilter[] filters)
         {
             _httpClient = httpClient;
             _filters = filters;

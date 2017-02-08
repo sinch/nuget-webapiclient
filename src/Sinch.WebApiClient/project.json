@@ -1,5 +1,5 @@
-﻿{
-  "version": "1.1.0-rc5",
+{
+  "version": "1.1.0",
   "title": "Sinch WebApiClient",
   "authors": [ "Sinch AB" ],
   "description": "Helper library to create a Rest client from interface. For sample usage see https://github.com/sinch/nuget-webapiclient",
@@ -10,10 +10,10 @@
     "iconUrl": "https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png",
     "licenseUrl": "https://opensource.org/licenses/MIT",
     "owners": [ "Sinch AB" ],
-    "releaseNotes": "Updated UriTemplate to be case insensitive.",
+    "releaseNotes": "Updated Castle.Core to 4.0 release",
     "summary": "Helper library to create a Rest client from interface",
     "requireLicenseAcceptance": false,
-    "tags": [ "sinch", "webapi", "attributerouting", "rest", "dynamicproxy" ],
+    "tags": [ "sinch", "webapi", "attributerouting", "rest", "dynamicproxy", "http" ],
     "files": [ "..\\..\\License.txt", "..\\..\\Readme.md" ],
     "repository": {
       "type": "git",
@@ -22,9 +22,9 @@
   },
 
   "dependencies": {
-    "Castle.Core": "4.0.0-beta002",
+    "Castle.Core": "4.0.0",
     "Newtonsoft.Json": "9.0.1",
-    "Tavis.UriTemplates": "1.1.0"
+    "Tavis.UriTemplates": "1.1.1"
   },
 
   "frameworks": {

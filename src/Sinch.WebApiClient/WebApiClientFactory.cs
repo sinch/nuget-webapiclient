@@ -11,13 +11,15 @@ namespace Sinch.WebApiClient
     public class WebApiClientFactory
     {
         private static readonly ProxyGenerator Generator = new ProxyGenerator();
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClient _httpClient;
 
         public WebApiClientFactory(HttpMessageHandler httpMessageHandler = null)
         {
-            _httpClient = httpMessageHandler != null
-                ? new HttpClient(httpMessageHandler)
-                : new HttpClient();
+            _httpClient = new HttpClientAdapter(
+                httpMessageHandler != null
+                    ? new HttpClient(httpMessageHandler)
+                    : new HttpClient()
+            );
         }
 
         public T CreateClient<T>(string baseUri, params IActionFilter[] filters) where T : class
