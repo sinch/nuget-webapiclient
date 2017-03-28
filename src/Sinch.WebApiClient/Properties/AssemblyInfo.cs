@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Sinch.WebApiClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Helper library to create a Rest client from interface. For sample usage see https://github.com/sinch/nuget-webapiclient.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sinch AB")]
 [assembly: AssemblyProduct("Sinch.WebApiClient")]
@@ -26,19 +26,6 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("6f7fe13a-6cc8-4853-9133-c19f76083cf2")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.3.*")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
 
 // Show internals to unittests
 [assembly: InternalsVisibleTo("Sinch.WebApiClientTest")]

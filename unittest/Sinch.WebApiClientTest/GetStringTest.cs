@@ -5,13 +5,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework;
 using Sinch.WebApiClient;
 
 namespace Sinch.WebApiClientTest
 {
-    [TestFixture]
+    [TestClass]
     public class GetStringTest
     {
         private const string HelloWorld = "Hello world!";
@@ -24,7 +24,7 @@ namespace Sinch.WebApiClientTest
             Task<string> Hello([ToUri] string name);
         }
 
-        [OneTimeSetUp]
+        [TestInitialize]
         public void RunInvokation()
         {
             var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
@@ -45,7 +45,7 @@ namespace Sinch.WebApiClientTest
             interceptor.Intercept(_invokation.Object);
         }
 
-        [Test]
+        [TestMethod]
         public async Task VerifyReturnValue()
         {
             Assert.IsNotNull(_invokation.Object.ReturnValue);
@@ -54,7 +54,7 @@ namespace Sinch.WebApiClientTest
             Assert.AreEqual(HelloWorld, result);
         }
 
-        [Test]
+        [TestMethod]
         public void VerifyRequest()
         {
             _client.Verify(c =>

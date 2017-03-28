@@ -5,13 +5,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework;
 using Sinch.WebApiClient;
 
 namespace Sinch.WebApiClientTest
 {
-    [TestFixture]
+    [TestClass]
     public class PostWithUriAndBodyTest
     {
         private Mock<IInvocation> _invokation;
@@ -34,7 +34,7 @@ namespace Sinch.WebApiClientTest
             public int Age { get; set; }
         }
 
-        [OneTimeSetUp]
+        [TestInitialize]
         public void RunInvokation()
         {
             var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
@@ -55,7 +55,7 @@ namespace Sinch.WebApiClientTest
             interceptor.Intercept(_invokation.Object);
         }
 
-        [Test]
+        [TestMethod]
         public async Task VerifyReturnValue()
         {
             Assert.IsNotNull(_invokation.Object.ReturnValue);
@@ -66,7 +66,7 @@ namespace Sinch.WebApiClientTest
             Assert.AreEqual(47, result.Age);
         }
 
-        [Test]
+        [TestMethod]
         public void VerifyRequest()
         {
             _client.Verify(c =>

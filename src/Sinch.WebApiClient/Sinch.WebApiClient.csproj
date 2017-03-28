@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Helper library to create a Rest client from interface. For sample usage see https://github.com/sinch/nuget-webapiclient.</Description>
+    <Copyright>Copyright © 2015 Sinch AB</Copyright>
+    <AssemblyTitle>Sinch WebApiClient</AssemblyTitle>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <Authors>Sinch AB</Authors>
+    <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
+    <AssemblyName>Sinch.WebApiClient</AssemblyName>
+    <PackageId>Sinch.WebApiClient</PackageId>
+    <PackageTags>sinch;webapi;attributerouting;rest;dynamicproxy;http</PackageTags>
+    <PackageReleaseNotes>Upgraded visual studio 2017, and latest nuget dependencies</PackageReleaseNotes>
+    <PackageIconUrl>https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/sinch/nuget-webapiclient</PackageProjectUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/sinch/nuget-webapiclient</RepositoryUrl>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <Version>1.1.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="..\..\License.txt;..\..\Readme.md">
+      <Pack>true</Pack>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.1" />
+    <PackageReference Include="Tavis.UriTemplates" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

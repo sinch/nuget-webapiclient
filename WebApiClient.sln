@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{374E149C-2257-4033-96A6-8F62A39EF865}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sinch.WebApiClient", "src\Sinch.WebApiClient\Sinch.WebApiClient.xproj", "{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CFEEEB04-FC72-4B5F-9EAA-ADB2764626ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unittest", "unittest", "{DA245D51-8FE8-46B7-A769-D9AD9193F871}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sinch.WebApiClientTest", "unittest\Sinch.WebApiClientTest\Sinch.WebApiClientTest.xproj", "{8248E966-202B-4059-9450-B180A2CA512B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sinch.WebApiClient", "src\Sinch.WebApiClient\Sinch.WebApiClient.csproj", "{FED53F4D-774B-49A9-91C6-3A0A0CAE9A48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sinch.WebApiClientTest", "unittest\Sinch.WebApiClientTest\Sinch.WebApiClientTest.csproj", "{8248E966-202B-4059-9450-B180A2CA512B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
