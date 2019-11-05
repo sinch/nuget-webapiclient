@@ -6,7 +6,7 @@
     <AssemblyTitle>Sinch WebApiClient</AssemblyTitle>
     <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>Sinch AB</Authors>
-    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462;net45</TargetFrameworks>
     <AssemblyName>Sinch.WebApiClient</AssemblyName>
     <PackageId>Sinch.WebApiClient</PackageId>
     <PackageTags>sinch;webapi;attributerouting;rest;dynamicproxy;http</PackageTags>
