@@ -15,7 +15,7 @@ namespace Sinch.WebApiClientTest
     public class GetPropertyTest
     {
         private const string ResponseMessage = "Hello John Doe!";
-        private Mock<IInvocation> _invokation;
+        private Mock<Castle.DynamicProxy.IInvocation> _invokation;
         private Mock<IHttpClient> _client;
 
         public class Name
@@ -41,7 +41,7 @@ namespace Sinch.WebApiClientTest
             _client = new Mock<IHttpClient>();
             _client.Setup(s => s.SendAsync(It.IsAny<HttpRequestMessage>())).ReturnsAsync(httpResponseMessage);
 
-            _invokation = new Mock<IInvocation>();
+            _invokation = new Mock<Castle.DynamicProxy.IInvocation>();
             _invokation.SetupGet(i => i.Method).Returns(typeof(IGreetings).GetMethod("Hello"));
             _invokation.SetupGet(i => i.Arguments).Returns(new object[] {new Name {First = "John", Last = "Doe"}});
             _invokation.SetupProperty(i => i.ReturnValue);

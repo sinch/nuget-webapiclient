@@ -14,7 +14,7 @@ namespace Sinch.WebApiClientTest
     [TestClass]
     public class PostWithUriAndBodyTest
     {
-        private Mock<IInvocation> _invokation;
+        private Mock<Castle.DynamicProxy.IInvocation> _invokation;
         private Mock<IHttpClient> _client;
 
         public interface ITestInterface
@@ -45,7 +45,7 @@ namespace Sinch.WebApiClientTest
             _client = new Mock<IHttpClient>();
             _client.Setup(s => s.SendAsync(It.IsAny<HttpRequestMessage>())).ReturnsAsync(httpResponseMessage);
 
-            _invokation = new Mock<IInvocation>();
+            _invokation = new Mock<Castle.DynamicProxy.IInvocation>();
             _invokation.SetupGet(i => i.Method).Returns(typeof(ITestInterface).GetMethod(nameof(ITestInterface.Find)));
             _invokation.SetupGet(i => i.Arguments).Returns(new object[] { "theType", new TestRequest{Query = "name is SomeValue"} });
             _invokation.SetupProperty(i => i.ReturnValue);

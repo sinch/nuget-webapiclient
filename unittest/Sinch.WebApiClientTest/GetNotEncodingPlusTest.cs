@@ -15,7 +15,7 @@ namespace Sinch.WebApiClientTest
     public class GetNotEncodingPlusTest
     {
         private const string HelloWorld = "Hello world!";
-        private Mock<IInvocation> _invokation;
+        private Mock<Castle.DynamicProxy.IInvocation> _invokation;
         private Mock<IHttpClient> _client;
 
         public interface IGreetings
@@ -35,7 +35,7 @@ namespace Sinch.WebApiClientTest
             _client = new Mock<IHttpClient>();
             _client.Setup(s => s.SendAsync(It.IsAny<HttpRequestMessage>())).ReturnsAsync(httpResponseMessage);
 
-            _invokation = new Mock<IInvocation>();
+            _invokation = new Mock<Castle.DynamicProxy.IInvocation>();
             _invokation.SetupGet(i => i.Method).Returns(typeof(IGreetings).GetMethod("Hello"));
             _invokation.SetupGet(i => i.Arguments).Returns(new object[] { "+15550127896" });
             _invokation.SetupProperty(i => i.ReturnValue);

@@ -15,11 +15,13 @@ namespace Sinch.WebApiClient
 
         public WebApiClientFactory(HttpMessageHandler httpMessageHandler = null)
         {
+            
             _httpClient = new HttpClientAdapter(
                 httpMessageHandler != null
                     ? new HttpClient(httpMessageHandler)
                     : new HttpClient()
             );
+            
         }
 
         public T CreateClient<T>(string baseUri, params IActionFilter[] filters) where T : class

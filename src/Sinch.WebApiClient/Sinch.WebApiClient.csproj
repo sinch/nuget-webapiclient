@@ -6,17 +6,17 @@
     <AssemblyTitle>Sinch WebApiClient</AssemblyTitle>
     <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>Sinch AB</Authors>
-    <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
     <AssemblyName>Sinch.WebApiClient</AssemblyName>
     <PackageId>Sinch.WebApiClient</PackageId>
     <PackageTags>sinch;webapi;attributerouting;rest;dynamicproxy;http</PackageTags>
-    <PackageReleaseNotes>Upgraded visual studio 2017, and latest nuget dependencies</PackageReleaseNotes>
+    <PackageReleaseNotes>upgraded to netstandard and netframweork 4.6.2, netstandard 2.0 to support tls1.2 and up default</PackageReleaseNotes>
     <PackageIconUrl>https://www.sinch.com/wp-content/uploads/2015/09/NET-icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/sinch/nuget-webapiclient</PackageProjectUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/sinch/nuget-webapiclient</RepositoryUrl>
-    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
+    <!--<NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>-->
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -25,7 +25,7 @@
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <Version>1.1.1</Version>
+    <Version>2.0.1-beta</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,9 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="System.Net.Http" Version="4.3.1" />
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Tavis.UriTemplates" Version="1.1.1" />
   </ItemGroup>
 
