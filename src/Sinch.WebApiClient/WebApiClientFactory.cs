@@ -15,11 +15,15 @@ namespace Sinch.WebApiClient
 
         public WebApiClientFactory(HttpMessageHandler httpMessageHandler = null)
         {
+            #if (NET40 || NET451 || NET452 || NET46 || NET461)
+                        ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;//SecurityProtocolType.Tls1.2;
+            #endif
             _httpClient = new HttpClientAdapter(
                 httpMessageHandler != null
                     ? new HttpClient(httpMessageHandler)
                     : new HttpClient()
             );
+            
         }
 
         public T CreateClient<T>(string baseUri, params IActionFilter[] filters) where T : class
